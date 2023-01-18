@@ -1,0 +1,304 @@
+<div>
+  <h3>
+    {{
+      isCreate()
+        ? "Add New Person"
+        : isEdit()
+        ? "Edit Person Info"
+        : "Person Info"
+    }}
+  </h3>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="person-container">
+      <div class="name-row">
+        <div [ngStyle]="{ width: '25%' }">
+          <span>Firstname</span>
+          <input
+            type="text"
+            class="form-control input-width"
+            placeholder="Firstname"
+            name="firstname"
+            ngModel
+            [disabled]="!isCreate() && !isEdit()"
+          />
+        </div>
+        <div [ngStyle]="{ width: '25%', 'margin-left': '10px' }">
+          <span>Lastname</span>
+          <input
+            type="text"
+            class="form-control input-width"
+            placeholder="Lastname"
+            name="lastname"
+            ngModel
+            [disabled]="!isCreate() && !isEdit()"
+          />
+        </div>
+        <div [ngStyle]="{ width: '25%', 'margin-left': '10px' }">
+          <span>Age</span>
+          <input
+            type="number"
+            class="form-control input-width"
+            placeholder="Age"
+            name="age"
+            ngModel
+            [disabled]="!isCreate() && !isEdit()"
+          />
+        </div>
+        <div [ngStyle]="{ width: '25%', 'margin-left': '10px' }">
+          <span>Birthdate</span>
+          <input
+            type="text"
+            class="form-control input-width"
+            placeholder="Birthdate"
+            name="birthdate"
+            ngModel
+            [disabled]="!isCreate() && !isEdit()"
+          />
+        </div>
+      </div>
+
+      <div
+        class="row"
+        [ngStyle]="{ 'margin-top': '20px', 'margin-left': '200px' }"
+      >
+        <div class="col-sm d-flex justify-content-center">
+          <div [ngStyle]="{ 'margin-top': '10px' }">
+            <div>
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [disabled]="!isCreate()"
+                >
+                  {{ selectedGender.length ? selectedGender : "Gender" }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li *ngFor="let gender of genders">
+                    <a
+                      class="dropdown-item"
+                      (click)="setGender(gender.valueOf())"
+                      >{{ gender }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm d-flex justify-content-center">
+            <div>
+              <span>Status</span>
+              <div class="form-check" *ngFor="let s of status">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="status"
+                  name="status"
+                  [checked]="selectedStatus === s.valueOf()"
+                  (click)="setStatus(s.valueOf())"
+                  [disabled]="!isCreate() && !isEdit()"
+                />
+                <label class="form-check-label" for="status"> {{ s }} </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm d-flex justify-content-center">
+            <div>
+              <span>Have child?</span>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="haveChild"
+                  (click)="setHaveChild(true)"
+                  [disabled]="!isCreate() && !isEdit()"
+                />
+                <label class="form-check-label" for="status"> Yes, I do </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="!haveChild && haveChild !== null"
+                  (click)="setHaveChild(false)"
+                  [disabled]="!isCreate() && !isEdit()"
+                />
+                <label class="form-check-label" for="status"
+                  >No, I do not
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div
+            [ngStyle]="{
+              'margin-top': '10px',
+              width: '200px'
+            }"
+          >
+            <div [ngStyle]="{ 'margin-bottom': '10px' }">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [disabled]="!isCreate() && !isEdit()"
+                >
+                  Children
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li *ngFor="let p of people">
+                    <a class="dropdown-item" (click)="selectChild(p)">{{
+                      p.firstname + " " + p.lastname
+                    }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div *ngIf="selectedChild.length">
+              <ul
+                class="list-group"
+                *ngFor="let child of selectedChild"
+                [ngStyle]="{ 'margin-bottom': '10px' }"
+              >
+                <a
+                  class="list-group-item"
+                  aria-current="true"
+                  [ngStyle]="{ backgroundColor: 'pink' }"
+                >
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                      {{ child.firstname + " " + child.lastname }}
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      aria-label="Close"
+                      [hidden]="isViewRoute()"
+                      (click)="removeChild(child)"
+                    ></button>
+                  </div>
+                  <p class="mb-1">
+                    {{ child.age + " years old " }}
+                  </p>
+                  <p class="mb-1">
+                    {{ "Birthdate: " + child.birthdate }}
+                  </p>
+                  <p class="mb-1">
+                    {{ "Status: " + child.status }}
+                  </p>
+                  <small>{{ child.gender }}</small>
+                </a>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col">
+            <div
+              [ngStyle]="{
+                'margin-bottom': '10px',
+                'margin-top': '10px'
+              }"
+            >
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  [disabled]="!isCreate() && !isEdit()"
+                >
+                  Parents
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li *ngFor="let p of people">
+                    <a class="dropdown-item" (click)="selectParents(p)">{{
+                      p.firstname + " " + p.lastname
+                    }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div *ngIf="selectedParents.length">
+              <ul
+                class="list-group"
+                *ngFor="let parent of selectedParents"
+                [ngStyle]="{ 'margin-bottom': '10px', width: '200px' }"
+              >
+                <a
+                  class="list-group-item"
+                  aria-current="true"
+                  [ngStyle]="{ backgroundColor: 'pink' }"
+                >
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                      {{ parent.firstname + " " + parent.lastname }}
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      aria-label="Close"
+                      [hidden]="isViewRoute()"
+                      (click)="removeParents(parent)"
+                    ></button>
+                  </div>
+                  <p class="mb-1">
+                    {{ parent.age + " years old " }}
+                  </p>
+                  <p class="mb-1">
+                    {{ "Birthdate: " + parent.birthdate }}
+                  </p>
+                  <p class="mb-1">
+                    {{ "Status: " + parent.status }}
+                  </p>
+                  <small>{{ parent.gender }}</small>
+                </a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="container d-flex align-items-end flex-column"
+      [ngStyle]="{ 'margin-top': '20px' }"
+    >
+      <div class="row">
+        <div class="col">
+          <button
+            *ngIf="isCreate()"
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!form.touched"
+          >
+            Create
+          </button>
+          <button
+            class="btn btn-primary"
+            *ngIf="isEdit()"
+            type="submit"
+            [disabled]="!form.touched"
+          >
+            Save
+          </button>
+        </div>
+        <div class="col">
+          <button class="btn btn-secondary" type="button" (click)="clear()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

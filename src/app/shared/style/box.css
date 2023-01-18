@@ -1,0 +1,17 @@
+.box {
+  margin-top: 10px;
+  border: 1px solid mediumpurple;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  width: 100%;
+}
+
+.person-container {
+  margin-top: 10px;
+  border: 1px solid palevioletred;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  background-color: snow;
+}

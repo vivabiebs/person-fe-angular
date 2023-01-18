@@ -1,0 +1,12 @@
+.name-row {
+  width: 100%;
+  display: flex;
+}
+
+.input-width {
+  width: 100%;
+}
+
+span {
+  font-weight: 700;
+}
