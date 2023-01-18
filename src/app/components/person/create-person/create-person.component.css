@@ -1,10 +1,24 @@
-.name-row {
-  width: 100%;
+.input-row {
+  width: 80%;
+  display: flex;
+}
+
+.select-row {
+  width: 20%;
   display: flex;
 }
 
 .input-width {
   width: 100%;
+}
+
+.each-input {
+  margin-left: 10px;
+}
+
+.forms {
+  margin-top: 20px;
+  /* margin-left: 200px; */
 }
 
 span {

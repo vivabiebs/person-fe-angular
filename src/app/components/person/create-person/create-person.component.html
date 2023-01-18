@@ -10,126 +10,110 @@
   </h3>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div class="person-container">
-      <div class="name-row">
-        <div [ngStyle]="{ width: '25%' }">
+      <div class="input-row">
+        <div class="each-input">
           <span>Firstname</span>
           <input
             type="text"
             class="form-control input-width"
-            placeholder="Firstname"
+            placeholder="Enter Firstname"
             name="firstname"
             ngModel
             [disabled]="!isCreate() && !isEdit()"
           />
         </div>
-        <div [ngStyle]="{ width: '25%', 'margin-left': '10px' }">
+        <div class="each-input">
           <span>Lastname</span>
           <input
             type="text"
             class="form-control input-width"
-            placeholder="Lastname"
+            placeholder="Enter Lastname"
             name="lastname"
             ngModel
             [disabled]="!isCreate() && !isEdit()"
           />
         </div>
-        <div [ngStyle]="{ width: '25%', 'margin-left': '10px' }">
+        <div class="each-input">
           <span>Age</span>
           <input
             type="number"
             class="form-control input-width"
-            placeholder="Age"
+            placeholder="Enter Age"
             name="age"
             ngModel
             [disabled]="!isCreate() && !isEdit()"
           />
         </div>
-        <div [ngStyle]="{ width: '25%', 'margin-left': '10px' }">
+        <div class="each-input">
           <span>Birthdate</span>
           <input
             type="text"
             class="form-control input-width"
-            placeholder="Birthdate"
+            placeholder="Enter Birthdate"
             name="birthdate"
             ngModel
             [disabled]="!isCreate() && !isEdit()"
           />
         </div>
-      </div>
-
-      <div
-        class="row"
-        [ngStyle]="{ 'margin-top': '20px', 'margin-left': '200px' }"
-      >
-        <div class="col-sm d-flex justify-content-center">
-          <div [ngStyle]="{ 'margin-top': '10px' }">
-            <div>
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  [disabled]="!isCreate()"
+        <div class="each-input">
+          <span>Status</span>
+          <div class="form-check" *ngFor="let s of status">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="status"
+              name="status"
+              [checked]="selectedStatus === s.valueOf()"
+              (click)="setStatus(s.valueOf())"
+              [disabled]="!isCreate() && !isEdit()"
+            />
+            <label class="form-check-label" for="status"> {{ s }} </label>
+          </div>
+        </div>
+        <div class="each-input">
+          <span>Any Child?</span>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="haveChild"
+              (click)="setHaveChild(true)"
+              [disabled]="!isCreate() && !isEdit()"
+            />
+            <label class="form-check-label" for="status"> Yes, I do </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="!haveChild && haveChild !== null"
+              (click)="setHaveChild(false)"
+              [disabled]="!isCreate() && !isEdit()"
+            />
+            <label class="form-check-label" for="status">No, I do not </label>
+          </div>
+        </div>
+        <div class="each-input">
+          <div class="dropdown">
+            <button
+              class="btn btn-info dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [disabled]="!isCreate()"
+            >
+              {{ selectedGender.length ? selectedGender : "Gender" }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li *ngFor="let gender of genders">
+                <a
+                  class="dropdown-item"
+                  (click)="setGender(gender.valueOf())"
+                  >{{ gender }}</a
                 >
-                  {{ selectedGender.length ? selectedGender : "Gender" }}
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li *ngFor="let gender of genders">
-                    <a
-                      class="dropdown-item"
-                      (click)="setGender(gender.valueOf())"
-                      >{{ gender }}</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm d-flex justify-content-center">
-            <div>
-              <span>Status</span>
-              <div class="form-check" *ngFor="let s of status">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  id="status"
-                  name="status"
-                  [checked]="selectedStatus === s.valueOf()"
-                  (click)="setStatus(s.valueOf())"
-                  [disabled]="!isCreate() && !isEdit()"
-                />
-                <label class="form-check-label" for="status"> {{ s }} </label>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm d-flex justify-content-center">
-            <div>
-              <span>Have child?</span>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  [checked]="haveChild"
-                  (click)="setHaveChild(true)"
-                  [disabled]="!isCreate() && !isEdit()"
-                />
-                <label class="form-check-label" for="status"> Yes, I do </label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  [checked]="!haveChild && haveChild !== null"
-                  (click)="setHaveChild(false)"
-                  [disabled]="!isCreate() && !isEdit()"
-                />
-                <label class="form-check-label" for="status"
-                  >No, I do not
-                </label>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -145,7 +129,7 @@
             <div [ngStyle]="{ 'margin-bottom': '10px' }">
               <div class="dropdown">
                 <button
-                  class="btn btn-secondary dropdown-toggle"
+                  class="btn btn-success dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
@@ -211,7 +195,7 @@
             >
               <div class="dropdown">
                 <button
-                  class="btn btn-secondary dropdown-toggle"
+                  class="btn btn-dark dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
@@ -270,34 +254,27 @@
         </div>
       </div>
     </div>
-    <div
-      class="container d-flex align-items-end flex-column"
-      [ngStyle]="{ 'margin-top': '20px' }"
-    >
-      <div class="row">
-        <div class="col">
-          <button
-            *ngIf="isCreate()"
-            class="btn btn-primary"
-            type="submit"
-            [disabled]="!form.touched"
-          >
-            Create
-          </button>
-          <button
-            class="btn btn-primary"
-            *ngIf="isEdit()"
-            type="submit"
-            [disabled]="!form.touched"
-          >
-            Save
-          </button>
-        </div>
-        <div class="col">
-          <button class="btn btn-secondary" type="button" (click)="clear()">
-            Cancel
-          </button>
-        </div>
+    <div [ngStyle]="{ 'margin-top': '20px' }">
+      <div class="d-flex justify-content-end">
+        <button
+          *ngIf="isCreate()"
+          class="btn btn-primary btn-margin"
+          type="submit"
+          [disabled]="!form.touched"
+        >
+          Create
+        </button>
+        <button
+          class="btn btn-primary"
+          *ngIf="isEdit()"
+          type="submit"
+          [disabled]="!form.touched"
+        >
+          Save
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="clear()">
+          Cancel
+        </button>
       </div>
     </div>
   </form>
