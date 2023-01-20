@@ -78,6 +78,7 @@ const GET_FILTERED_PEOPLE = gql`
       lastname
       age
       gender
+      status
       birthdate
       children {
         id

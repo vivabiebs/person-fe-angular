@@ -1,7 +1,6 @@
 <div>
   <form (ngSubmit)="search()" #form="ngForm">
-    <div [ngStyle]="{ display: 'flex', marginTop: '35px' }"></div>
-    <div class="container">
+    <div class="container d-flex justify-content-center main-container">
       <div class="row">
         <div class="col-sm d-flex justify-content-center">
           <div>
@@ -38,6 +37,7 @@
           <div class="status-container">
             <span>Status</span>
             <div class="form-check" *ngFor="let s of status">
+            
               <input
                 class="form-check-input"
                 type="radio"

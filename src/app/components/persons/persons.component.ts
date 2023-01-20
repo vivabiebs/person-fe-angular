@@ -22,6 +22,7 @@ import { filterDuplicate } from 'src/app/utils/filter';
   ],
 })
 export class PersonsComponent implements OnInit, OnDestroy {
+  console = console;
   private peopleSubscription: Subscription = new Subscription();
   private filteredPeopleSubscription: Subscription = new Subscription();
   private clearFormSubscription: Subscription = new Subscription();
@@ -84,6 +85,10 @@ export class PersonsComponent implements OnInit, OnDestroy {
     this.clearFormSubscription = this.personService.clearForm.subscribe(() => {
       this.people = this.personService.getQueriedPeople();
     });
+  }
+  
+  changeToCapitalize(string: string) {
+    return string.slice(0, 1).concat(string.substring(1, string.length).toLowerCase());
   }
 
   select(index: number) {

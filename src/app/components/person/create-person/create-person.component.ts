@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Form, NgForm, RequiredValidator } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IMutationPerson } from 'src/app/interfaces/person';
@@ -18,6 +18,7 @@ import { str2enumGender, str2enumStatus } from 'src/app/utils/transform2enum';
   ],
 })
 export class CreatePersonComponent implements OnInit, OnDestroy {
+  console = console;
   genders = GENDERS.slice();
   status = STATUS.slice();
   people: IMutationPerson[] = [];
@@ -40,6 +41,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.people = this.personService.getQueriedPeople();
+
 
     const localViewPerson = localStorage.getItem('viewPerson');
     if (localViewPerson) {

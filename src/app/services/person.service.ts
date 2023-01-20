@@ -29,14 +29,13 @@ export class PersonService implements OnInit {
   private people: IMutationPerson[] = [];
   persons = new Subject<IPerson[]>();
 
-  constructor(private apollo: Apollo, private router: Router) {}
+  constructor(private apollo: Apollo, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   getPeople() {
     return this.apollo.watchQuery<{ people: IMutationPerson[] }>({
       query: GET_PEOPLE,
-      // pollInterval: 500,
     });
   }
 
@@ -81,7 +80,7 @@ export class PersonService implements OnInit {
           gender: genderparams,
         },
       },
-    });
+    })
   }
 
   getQueriedPeople() {
@@ -94,13 +93,12 @@ export class PersonService implements OnInit {
 
   addPerson(person: IMutationPerson) {
     console.log(person)
-    console.log('add person service');
+    console.log('Add person');
     this.apollo
       .mutate<{ createPerson: IMutationPerson }>({
         mutation: CREATE_PERSON,
         variables: { input: { ...person } },
         update: (cache) => {
-          console.log('update cache in add person');
           const existingPeople: any = cache.readQuery({ query: GET_PEOPLE });
           cache.writeQuery({
             query: GET_PEOPLE,
@@ -108,8 +106,7 @@ export class PersonService implements OnInit {
           });
         },
       })
-      .subscribe(({ data }) => {
-        console.log('route after get data from add Person subscribe');
+      .subscribe(() => {
         this.router.navigate(['persons']);
       });
   }
@@ -139,6 +136,7 @@ export class PersonService implements OnInit {
   }
 
   updatePerson(id: string, input: IPersonUpdate) {
+    console.log('UPDATE person')
     this.apollo
       .mutate<{ updatePerson: IMutationPerson }>({
         mutation: UPDATE_PERSON,

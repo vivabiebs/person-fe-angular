@@ -1,24 +1,28 @@
-.input-row {
-  width: 80%;
-  display: flex;
+.form-group-list {
+  margin-top: 10px;
+  background-color: lavender;
+  width: 25%;
 }
 
-.select-row {
-  width: 20%;
-  display: flex;
+.dropdown-style {
+  background-color: rgb(242, 203, 242);
+  color: black;
 }
 
-.input-width {
-  width: 100%;
+.btn-btn {
+  background-color: pink;
+}
+
+.children-list {
+  margin-left: 10px;
 }
 
 .each-input {
-  margin-left: 10px;
+  width: 75%;
 }
 
 .forms {
   margin-top: 20px;
-  /* margin-left: 200px; */
 }
 
 span {

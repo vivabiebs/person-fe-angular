@@ -21,32 +21,26 @@ export class FilterPerson implements OnInit {
   selectedStatus: string = '';
   isClear: boolean = false;
   isAllGender: boolean = false;
+  isAllStatus: boolean = false;
 
-  constructor(private personService: PersonService) {}
+  constructor(private personService: PersonService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   search() {
-    const value = {
-      age: this.age,
-      status: this.selectedStatus === 'All' ? '' : this.selectedStatus,
-      gender: this.selectedGender.includes('All') ? [] : this.selectedGender,
-    };
-
     this.personService.fitleredPeople.next({
       age: this.age,
-      status: this.selectedStatus,
       gender: this.selectedGender,
+      status: this.selectedStatus,
     });
   }
 
-  clearForm(form: NgForm) {
-    this.isClear = true;
-    this.age = 0;
-    this.selectedGender = [];
-    this.selectedStatus = '';
-    this.isAllGender = false;
-    this.personService.clearForm.next(true);
+  selectStatus(status: string) {
+    if (status === 'All') {
+      this.isAllStatus = !this.isAllStatus;
+      this.selectedStatus = '';
+    }
+    this.selectedStatus = status;
   }
 
   selectGender(gender: string) {
@@ -57,7 +51,13 @@ export class FilterPerson implements OnInit {
       this.selectedGender = filterDuplicate(gender, this.selectedGender);
     }
   }
-  selectStatus(status: string) {
-    this.selectedStatus = status;
+
+  clearForm(form: NgForm) {
+    this.isClear = true;
+    this.age = 0;
+    this.selectedGender = [];
+    this.selectedStatus = '';
+    this.isAllGender = false;
+    this.personService.clearForm.next(true);
   }
 }

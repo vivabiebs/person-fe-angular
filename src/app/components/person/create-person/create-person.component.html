@@ -10,155 +10,208 @@
   </h3>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div class="person-container">
-      <div class="input-row">
-        <div class="each-input">
-          <span>Firstname</span>
-          <input
-            type="text"
-            class="form-control input-width"
-            placeholder="Enter Firstname"
-            name="firstname"
-            ngModel
-            [disabled]="!isCreate() && !isEdit()"
-          />
-        </div>
-        <div class="each-input">
-          <span>Lastname</span>
-          <input
-            type="text"
-            class="form-control input-width"
-            placeholder="Enter Lastname"
-            name="lastname"
-            ngModel
-            [disabled]="!isCreate() && !isEdit()"
-          />
-        </div>
-        <div class="each-input">
-          <span>Age</span>
-          <input
-            type="number"
-            class="form-control input-width"
-            placeholder="Enter Age"
-            name="age"
-            ngModel
-            [disabled]="!isCreate() && !isEdit()"
-          />
-        </div>
-        <div class="each-input">
-          <span>Birthdate</span>
-          <input
-            type="text"
-            class="form-control input-width"
-            placeholder="Enter Birthdate"
-            name="birthdate"
-            ngModel
-            [disabled]="!isCreate() && !isEdit()"
-          />
-        </div>
-        <div class="each-input">
-          <span>Status</span>
-          <div class="form-check" *ngFor="let s of status">
-            <input
-              class="form-check-input"
-              type="radio"
-              id="status"
-              name="status"
-              [checked]="selectedStatus === s.valueOf()"
-              (click)="setStatus(s.valueOf())"
-              [disabled]="!isCreate() && !isEdit()"
-            />
-            <label class="form-check-label" for="status"> {{ s }} </label>
+      <div class="row">
+        <div class="col-6">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="each-input">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Firstname</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="firstname"
+                      name="firstname"
+                      placeholder="Enter Firstname"
+                      aria-describedby="inputGroup-sizing-default"
+                      ngModel
+                      [disabled]="!isCreate() && !isEdit()"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="each-input">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Lastname</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="firstname"
+                      name="lastname"
+                      placeholder="Enter Lastname"
+                      aria-describedby="inputGroup-sizing-default"
+                      ngModel
+                      [disabled]="!isCreate() && !isEdit()"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="w-100"></div>
+              <div class="col">
+                <div class="each-input">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Age</span
+                      >
+                    </div>
+                    <input
+                      type="number"
+                      class="form-control"
+                      aria-label="age"
+                      name="age"
+                      placeholder="Enter Age"
+                      aria-describedby="inputGroup-sizing-default"
+                      ngModel
+                      [disabled]="!isCreate() && !isEdit()"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="each-input">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Date of Birth</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="birthdate"
+                      name="birthdate"
+                      placeholder="Enter Date of Birth"
+                      aria-describedby="inputGroup-sizing-default"
+                      ngModel
+                      [disabled]="!isCreate() && !isEdit()"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="each-input">
-          <span>Any Child?</span>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="haveChild"
-              (click)="setHaveChild(true)"
-              [disabled]="!isCreate() && !isEdit()"
-            />
-            <label class="form-check-label" for="status"> Yes, I do </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="!haveChild && haveChild !== null"
-              (click)="setHaveChild(false)"
-              [disabled]="!isCreate() && !isEdit()"
-            />
-            <label class="form-check-label" for="status">No, I do not </label>
-          </div>
-        </div>
-        <div class="each-input">
-          <div class="dropdown">
-            <button
-              class="btn btn-info dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              [disabled]="!isCreate()"
-            >
-              {{ selectedGender.length ? selectedGender : "Gender" }}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li *ngFor="let gender of genders">
-                <a
-                  class="dropdown-item"
-                  (click)="setGender(gender.valueOf())"
-                  >{{ gender }}</a
-                >
-              </li>
-            </ul>
+
+        <div class="col-6">
+          <div class="row">
+            <div class="col-4">
+              <div class="each-input">
+                <span>Status</span>
+                <div class="form-check" *ngFor="let s of status">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="status"
+                    name="status"
+                    [checked]="selectedStatus === s.valueOf()"
+                    (click)="setStatus(s.valueOf())"
+                    [disabled]="!isCreate() && !isEdit()"
+                  />
+                  <label class="form-check-label" for="status"> {{ s }} </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <span>Any Child?</span>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="haveChild"
+                  (click)="setHaveChild(true)"
+                  [disabled]="!isCreate() && !isEdit()"
+                />
+                <label class="form-check-label" for="status"> Yes </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="!haveChild && haveChild !== null"
+                  (click)="setHaveChild(false)"
+                  [disabled]="!isCreate() && !isEdit()"
+                />
+                <label class="form-check-label" for="status">No </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="each-input">
+                <span>Gender</span>
+                <div class="form-check" *ngFor="let gender of genders">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="gender"
+                    name="gender"
+                    [checked]="
+                      selectedGender.toLowerCase() ===
+                      gender.valueOf().toLowerCase()
+                    "
+                    (click)="setGender(gender.valueOf())"
+                    [disabled]="!isCreate() && !isEdit()"
+                  />
+                  <label class="form-check-label" for="gender">
+                    {{ gender }}
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-          <div
-            [ngStyle]="{
-              'margin-top': '10px',
-              width: '200px'
-            }"
-          >
-            <div [ngStyle]="{ 'margin-bottom': '10px' }">
-              <div class="dropdown">
-                <button
-                  class="btn btn-success dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  [disabled]="!isCreate() && !isEdit()"
-                >
-                  Children
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li *ngFor="let p of people">
-                    <a class="dropdown-item" (click)="selectChild(p)">{{
-                      p.firstname + " " + p.lastname
-                    }}</a>
-                  </li>
-                </ul>
-              </div>
+          <div class="children-list">
+            <div class="dropdown">
+              <button
+                class="btn dropdown-toggle dropdown-style"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                [disabled]="!isCreate() && !isEdit()"
+              >
+                Children
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let p of people">
+                  <a class="dropdown-item" (click)="selectChild(p)">{{
+                    p.firstname + " " + p.lastname
+                  }}</a>
+                </li>
+              </ul>
             </div>
 
             <div *ngIf="selectedChild.length">
               <ul
-                class="list-group"
+                class="list-group listings"
                 *ngFor="let child of selectedChild"
-                [ngStyle]="{ 'margin-bottom': '10px' }"
               >
-                <a
-                  class="list-group-item"
-                  aria-current="true"
-                  [ngStyle]="{ backgroundColor: 'pink' }"
-                >
+                <a class="list-group-item form-group-list" aria-current="true">
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">
                       {{ child.firstname + " " + child.lastname }}
@@ -185,97 +238,80 @@
               </ul>
             </div>
           </div>
-
-          <div class="col">
-            <div
-              [ngStyle]="{
-                'margin-bottom': '10px',
-                'margin-top': '10px'
-              }"
-            >
-              <div class="dropdown">
-                <button
-                  class="btn btn-dark dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  [disabled]="!isCreate() && !isEdit()"
-                >
-                  Parents
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li *ngFor="let p of people">
-                    <a class="dropdown-item" (click)="selectParents(p)">{{
-                      p.firstname + " " + p.lastname
-                    }}</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div *ngIf="selectedParents.length">
-              <ul
-                class="list-group"
-                *ngFor="let parent of selectedParents"
-                [ngStyle]="{ 'margin-bottom': '10px', width: '200px' }"
+        </div>
+        <div class="col">
+          <div class="listings">
+            <div class="dropdown">
+              <button
+                class="btn dropdown-toggle dropdown-style"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                [disabled]="!isCreate() && !isEdit()"
               >
-                <a
-                  class="list-group-item"
-                  aria-current="true"
-                  [ngStyle]="{ backgroundColor: 'pink' }"
-                >
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">
-                      {{ parent.firstname + " " + parent.lastname }}
-                    </h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      aria-label="Close"
-                      [hidden]="isViewRoute()"
-                      (click)="removeParents(parent)"
-                    ></button>
-                  </div>
-                  <p class="mb-1">
-                    {{ parent.age + " years old " }}
-                  </p>
-                  <p class="mb-1">
-                    {{ "Birthdate: " + parent.birthdate }}
-                  </p>
-                  <p class="mb-1">
-                    {{ "Status: " + parent.status }}
-                  </p>
-                  <small>{{ parent.gender }}</small>
-                </a>
+                Parents
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let p of people">
+                  <a class="dropdown-item" (click)="selectParents(p)">{{
+                    p.firstname + " " + p.lastname
+                  }}</a>
+                </li>
               </ul>
             </div>
+          </div>
+
+          <div *ngIf="selectedParents.length">
+            <ul
+              class="list-group parents-list"
+              *ngFor="let parent of selectedParents"
+            >
+              <a class="list-group-item form-group-list" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">
+                    {{ parent.firstname + " " + parent.lastname }}
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    aria-label="Close"
+                    [hidden]="isViewRoute()"
+                    (click)="removeParents(parent)"
+                  ></button>
+                </div>
+                <h6>
+                  {{ parent.age + " years old " }}
+                </h6>
+                <h6>
+                  {{ "Birthdate: " + parent.birthdate }}
+                </h6>
+                <h6>
+                  {{ "Status: " + parent.status }}
+                </h6>
+                <h6>{{ parent.gender }}</h6>
+              </a>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <div [ngStyle]="{ 'margin-top': '20px' }">
-      <div class="d-flex justify-content-end">
-        <button
-          *ngIf="isCreate()"
-          class="btn btn-primary btn-margin"
-          type="submit"
-          [disabled]="!form.touched"
-        >
-          Create
-        </button>
-        <button
-          class="btn btn-primary"
-          *ngIf="isEdit()"
-          type="submit"
-          [disabled]="!form.touched"
-        >
-          Save
-        </button>
-        <button class="btn btn-secondary" type="button" (click)="clear()">
-          Cancel
-        </button>
-      </div>
+
+    <div class="d-flex justify-content-end forms">
+      <button
+        *ngIf="isCreate()"
+        class="btn btn-margin btn-btn"
+        type="submit"
+        [disabled]="!form.touched"
+      >
+        Create
+      </button>
+      <button class="btn btn-margin btn-btn" *ngIf="isEdit()" type="submit">
+        Save
+      </button>
+      <button class="btn btn-secondary" type="button" (click)="clear()">
+        Cancel
+      </button>
     </div>
   </form>
 </div>
