@@ -102,7 +102,7 @@
                       class="form-control"
                       aria-label="birthdate"
                       name="birthdate"
-                      placeholder="Enter Date of Birth"
+                      placeholder="dd-mm-yyyy"
                       aria-describedby="inputGroup-sizing-default"
                       ngModel
                       [disabled]="!isCreate() && !isEdit()"
@@ -228,12 +228,15 @@
                     {{ child.age + " years old " }}
                   </p>
                   <p class="mb-1">
-                    {{ "Birthdate: " + child.birthdate }}
+                    {{
+                      "Birthdate: " + reverseDateFormat(child.birthdate)
+                        | date : "longDate"
+                    }}
                   </p>
                   <p class="mb-1">
                     {{ "Status: " + child.status }}
                   </p>
-                  <small>{{ child.gender }}</small>
+                  <small>{{ "Gender : " + child.gender }}</small>
                 </a>
               </ul>
             </div>
@@ -284,12 +287,15 @@
                   {{ parent.age + " years old " }}
                 </h6>
                 <h6>
-                  {{ "Birthdate: " + parent.birthdate }}
+                  {{
+                    "Birthdate: " + reverseDateFormat(parent.birthdate)
+                      | date : "longDate"
+                  }}
                 </h6>
                 <h6>
                   {{ "Status: " + parent.status }}
                 </h6>
-                <h6>{{ parent.gender }}</h6>
+                <h6>{{ "Gender : " + parent.gender }}</h6>
               </a>
             </ul>
           </div>

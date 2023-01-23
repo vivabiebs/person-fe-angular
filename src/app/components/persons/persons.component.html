@@ -6,7 +6,8 @@
       <button
         class="btn btn-margin"
         [ngStyle]="{ backgroundColor: 'plum', color: 'white' }"
-        (click)="goto()"
+        (click)="routeTo()"
+        [disabled]="selectedPeople.length"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +24,7 @@
             d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"
           />
         </svg>
-        ADD
+        ADD NEW PERSON
       </button>
       <button
         class="btn btn-margin"
@@ -71,7 +72,7 @@
       <button
         class="btn btn-margin"
         [ngStyle]="{ backgroundColor: 'black', color: 'white' }"
-        [disabled]="!selectedPeople.length"
+        [disabled]="!selectedPeople.length || selectedPeople.length > 1"
         (click)="viewPerson()"
       >
         <svg
@@ -92,33 +93,39 @@
     <div class="persons-table-container">
       <table class="table table-hover table-striped">
         <thead class="thead-dark">
-          <tr>
+          <tr class="sortable-tr">
             <th scope="col">select</th>
-            <th scope="col">id</th>
-            <th scope="col">Firstname</th>
-            <th scope="col">Lastname</th>
-            <th scope="col">Age</th>
-            <th scope="col">Date of Birth</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Status</th>
+            <th
+              scope="col"
+              (click)="sort('id')"
+              class="d-flex justify-content-center"
+            >
+              id
+            </th>
+            <th scope="col" (click)="sort('firstname')">Firstname</th>
+            <th scope="col" (click)="sort('lastname')">Lastname</th>
+            <th scope="col" (click)="sort('age')">Age</th>
+            <th scope="col" (click)="sort('birthdate')">Date of Birth</th>
+            <th scope="col" (click)="sort('gender')">Gender</th>
+            <th scope="col" (click)="sort('status')">Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let person of people">
-            <td [ngStyle]="{ width: '30px' }">
+            <td class="select-field">
               <input
                 class="form-check-input"
                 type="checkbox"
                 (click)="select(+person.id)"
               />
             </td>
-            <th scope="row" [ngStyle]="{ width: '80px' }">
+            <th scope="row" class="d-flex justify-content-center">
               {{ person.id }}
             </th>
             <td>{{ person.firstname }}</td>
             <td>{{ person.lastname }}</td>
             <td>{{ person.age }}</td>
-            <td>{{ person.birthdate }}</td>
+            <td>{{ reverseDateFormat(person.birthdate) | date : "longDate" }}</td>
             <td>{{ changeToCapitalize(person.gender) }}</td>
             <td>{{ changeToCapitalize(person.status) }}</td>
           </tr>

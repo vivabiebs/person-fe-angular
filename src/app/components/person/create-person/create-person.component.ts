@@ -174,6 +174,10 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
     });
   }
 
+  reverseDateFormat(str: string) {
+    return str.split('-').reverse().join('-');
+  }
+
   ngOnDestroy(): void {
     this.genders = GENDERS;
     this.status = STATUS;

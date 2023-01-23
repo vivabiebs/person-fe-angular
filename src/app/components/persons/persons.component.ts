@@ -11,6 +11,8 @@ import {
 import { IMutationPerson } from 'src/app/interfaces/person';
 import { PersonService } from 'src/app/services/person.service';
 import { filterDuplicate } from 'src/app/utils/filter';
+import { compareByProperty } from 'src/app/utils/sort'
+
 
 @Component({
   selector: 'app-persons',
@@ -26,9 +28,14 @@ export class PersonsComponent implements OnInit, OnDestroy {
   private peopleSubscription: Subscription = new Subscription();
   private filteredPeopleSubscription: Subscription = new Subscription();
   private clearFormSubscription: Subscription = new Subscription();
+  private collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: "base"
+  });
 
   people: IMutationPerson[] = [];
   selectedPeople: string[] = [];
+  isASC: boolean = false;
 
   constructor(
     private personService: PersonService,
@@ -86,9 +93,22 @@ export class PersonsComponent implements OnInit, OnDestroy {
       this.people = this.personService.getQueriedPeople();
     });
   }
-  
+
+
+  reverseDateFormat(str: string) {
+    return str.split('-').reverse().join('-');
+  }
+
   changeToCapitalize(string: string) {
     return string.slice(0, 1).concat(string.substring(1, string.length).toLowerCase());
+  }
+
+  sort(field: string) {
+    let arrayForSort = [...this.people];
+    console.log("sort by " + field)
+    arrayForSort.sort((a, b) => compareByProperty(a, b, this.isASC, field));
+    this.people = arrayForSort;
+    this.isASC = !this.isASC;
   }
 
   select(index: number) {
@@ -98,7 +118,7 @@ export class PersonsComponent implements OnInit, OnDestroy {
     );
   }
 
-  goto() {
+  routeTo() {
     this.router.navigate(['person/create']);
   }
 
