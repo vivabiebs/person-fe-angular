@@ -18,11 +18,22 @@
 }
 
 .create-person-container {
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 7%;
   border: 1px solid palevioletred;
   border-radius: 15px;
   padding: 20px;
   width: 85%;
   background-color: snow;
+}
+
+.noti-container {
+  background-color: red;
+  color: white;
+  margin-top: 20px;
+  margin-left: 40%;
+  border-radius: 15px;
+  padding: 10px;
+  width: 22%;
+  align-items: center;
 }

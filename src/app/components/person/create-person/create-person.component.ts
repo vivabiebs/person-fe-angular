@@ -30,6 +30,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
   selectedGender: string = '';
   selectedChild: IMutationPerson[] = [];
   selectedParents: IMutationPerson[] = [];
+  errorMsg: string = 'null';
 
   peopleSubscription = new Subscription();
 
@@ -76,6 +77,15 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
     const eGender = str2enumGender(this.selectedGender);
     const eStatus = str2enumStatus(this.selectedStatus);
 
+    if (!form.value.firstname || !form.value.lastname || !form.value.age || !form.value.birthdate ||
+      !eStatus || !eGender || this.haveChild === null) {
+      let str = 'Invalid input! Please fill the form completely.';
+      this.console.log(str)
+      this.errorMsg = 'Invalid input! Please fill out the form completely.';
+      // throw new Error('Invalid input! Please fill the form completely.');
+      throw console.error('Invalid input! Please fill out the form completely.');
+    }
+
     const person: IMutationPerson = {
       id: (+this.people[this.people.length - 1].id + 1).toString(),
       firstname: form.value.firstname,
@@ -95,6 +105,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
       person.id = this.viewPerson.id;
 
       this.personService.updatePerson(this.viewPerson.id, person);
+      this.errorMsg = 'null';
     }
     this.clear();
   }
@@ -128,6 +139,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
   setHaveChild(val: boolean) {
     this.haveChild = val;
   }
+
   clear() {
     //clear form
     this.haveChild = false;
@@ -137,6 +149,10 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
     this.selectedGender = '';
 
     this.router.navigate(['persons']);
+  }
+
+  isError() {
+    return this.errorMsg !== 'null';
   }
 
   isViewRoute() {
