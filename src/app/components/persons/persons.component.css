@@ -9,3 +9,8 @@
 .sortable-tr {
   cursor: pointer;
 }
+
+.add-btn{
+  background-color: rgb(145, 147, 188);
+  color: whitesmoke;
+}
