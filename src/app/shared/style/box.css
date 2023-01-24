@@ -8,10 +8,21 @@
 }
 
 .person-container {
-  margin-top: 10px;
+  margin-top: 50px;
+  margin-left: 15%;
   border: 1px solid palevioletred;
   border-radius: 15px;
   padding: 20px;
-  width: 100%;
+  width: 80%;
+  background-color: snow;
+}
+
+.create-person-container {
+  margin-top: 50px;
+  margin-left: 7%;
+  border: 1px solid palevioletred;
+  border-radius: 15px;
+  padding: 20px;
+  width: 85%;
   background-color: snow;
 }

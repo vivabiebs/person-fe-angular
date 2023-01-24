@@ -1,6 +1,6 @@
 <div>
   <app-header></app-header>
-  <div class="person-container" [ngStyle]="{ marginTop: '50px' }">
+  <div class="person-container" [ngStyle]="{ width: '70%' }">
     <h3 class="d-flex justify-content-center">Our people list</h3>
     <div class="d-flex justify-content-end">
       <button
@@ -125,7 +125,9 @@
             <td>{{ person.firstname }}</td>
             <td>{{ person.lastname }}</td>
             <td>{{ person.age }}</td>
-            <td>{{ reverseDateFormat(person.birthdate) | date : "longDate" }}</td>
+            <td>
+              {{ reverseDateFormat(person.birthdate) | date : "longDate" }}
+            </td>
             <td>{{ changeToCapitalize(person.gender) }}</td>
             <td>{{ changeToCapitalize(person.status) }}</td>
           </tr>

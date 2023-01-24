@@ -1,7 +1,7 @@
 .form-group-list {
   margin-top: 10px;
   background-color: lavender;
-  width: 25%;
+  width: 30%;
 }
 
 .dropdown-style {
@@ -23,6 +23,7 @@
 
 .forms {
   margin-top: 20px;
+  margin-right: 8%;
 }
 
 span {
