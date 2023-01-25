@@ -18,6 +18,7 @@ import {
   IFilter,
   IMutationPerson,
   IPerson,
+  IPersonForCreate,
   IPersonUpdate,
   Status,
 } from './../interfaces/person';

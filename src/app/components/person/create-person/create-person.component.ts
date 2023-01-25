@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Form, NgForm, RequiredValidator } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IMutationPerson } from 'src/app/interfaces/person';
+import { IMutationPerson, IPerson, IPersonForCreate } from 'src/app/interfaces/person';
 import { PersonService } from 'src/app/services/person.service';
 import { DEFAULT_VALUE, GENDERS, STATUS } from 'src/app/shared/data';
 import { removeItem } from 'src/app/utils/filter';
 import { str2enumGender, str2enumStatus } from 'src/app/utils/transform2enum';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-create-person',
@@ -88,6 +89,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
 
     const person: IMutationPerson = {
       id: (+this.people[this.people.length - 1].id + 1).toString(),
+      // id: (+this.people[this.people.length - 1].id + 1),
       firstname: form.value.firstname,
       lastname: form.value.lastname,
       age: +form.value.age,
@@ -99,12 +101,28 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
       children: this.selectedChild,
     };
 
+    // const parentsId = _.map(this.selectedParents, 'id').map((id) => parseInt(id));
+    // const childrenId = _.map(this.selectedChild, 'id').map((id) => parseInt(id));
+    
+
+    // const person: IPersonForCreate = {
+    //   firstname: form.value.firstname,
+    //   lastname: form.value.lastname,
+    //   age: +form.value.age,
+    //   birthdate: form.value.birthdate,
+    //   status: eStatus,
+    //   gender: Array.isArray(eGender) ? eGender[0] : eGender,
+    //   haveChild: Boolean(this.haveChild),
+    //   parents: parentsId,
+    //   children: childrenId,
+    // };
+
     if (this.router.url.includes('create')) {
       this.personService.addPerson(person);
     } else if (this.router.url.includes('edit') && this.viewPerson) {
-      person.id = this.viewPerson.id;
+      // person.id = this.viewPerson.id;
 
-      this.personService.updatePerson(this.viewPerson.id, person);
+      // this.personService.updatePerson(this.viewPerson.id, person);
       this.errorMsg = 'null';
     }
     this.clear();

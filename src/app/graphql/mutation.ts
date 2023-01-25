@@ -3,7 +3,6 @@ import { gql } from 'apollo-angular';
 const CREATE_PERSON = gql`
   mutation CreatePerson($input: CreatePersonInput) {
     createPerson(input: $input) {
-      id
       firstname
       lastname
       age

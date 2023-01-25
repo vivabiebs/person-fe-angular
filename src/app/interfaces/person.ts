@@ -11,6 +11,18 @@ export interface IPerson {
   parents?: string[];
 }
 
+export interface IPersonForCreate {
+  firstname: string;
+  lastname: string;
+  age: number;
+  gender: Gender;
+  status: Status;
+  birthdate: string;
+  haveChild: boolean;
+  children?: number[];
+  parents?: number[];
+}
+
 export interface IFilter {
   age: number;
   status: string;
