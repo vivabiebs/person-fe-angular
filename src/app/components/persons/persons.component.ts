@@ -8,11 +8,10 @@ import {
   DELETED,
   UPDATED,
 } from 'src/app/graphql/subscription';
-import { IMutationPerson, IPersonForCreate } from 'src/app/interfaces/person';
+import { IMutationPerson } from 'src/app/interfaces/person';
 import { PersonService } from 'src/app/services/person.service';
 import { filterDuplicate } from 'src/app/utils/filter';
-import { compareByProperty } from 'src/app/utils/sort'
-
+import { compareByProperty } from 'src/app/utils/sort';
 
 @Component({
   selector: 'app-persons',
@@ -43,7 +42,7 @@ export class PersonsComponent implements OnInit, OnDestroy {
     private apollo: Apollo
   ) {
     this.apollo
-      .subscribe<{ deletePerson: { id: number } }>({
+      .subscribe<{ deletePerson: { id: string } }>({
         query: DELETED,
       })
       .subscribe((result) => {
@@ -53,7 +52,7 @@ export class PersonsComponent implements OnInit, OnDestroy {
         }
       });
     this.apollo
-      .subscribe<{ createPerson: IPersonForCreate }>({
+      .subscribe<{ createPerson: IMutationPerson }>({
         query: CREATED,
       })
       .subscribe((result) => {
