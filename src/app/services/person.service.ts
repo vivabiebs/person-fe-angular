@@ -17,7 +17,7 @@ import {
   Gender,
   IFilter,
   IMutationPerson,
-  IPerson,
+  // IPerson,
   IPersonForCreate,
   IPersonUpdate,
   Status,
@@ -28,7 +28,7 @@ export class PersonService implements OnInit {
   fitleredPeople = new Subject<IFilter>();
   clearForm = new Subject<boolean>();
   private people: IMutationPerson[] = [];
-  persons = new Subject<IPerson[]>();
+  persons = new Subject<IPersonForCreate[]>();
 
   constructor(private apollo: Apollo, private router: Router) { }
 
@@ -92,7 +92,7 @@ export class PersonService implements OnInit {
     this.people = people;
   }
 
-  addPerson(person: IMutationPerson) {
+  addPerson(person: IPersonForCreate) {
     console.log(person)
     console.log('Add person');
     this.apollo
@@ -136,10 +136,10 @@ export class PersonService implements OnInit {
       });
   }
 
-  updatePerson(id: string, input: IPersonUpdate) {
+  updatePerson(id: string, input: IPersonForCreate) {
     console.log('UPDATE person')
     this.apollo
-      .mutate<{ updatePerson: IMutationPerson }>({
+      .mutate<{ updatePerson: IPersonForCreate }>({
         mutation: UPDATE_PERSON,
         variables: {
           id,

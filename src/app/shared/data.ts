@@ -1,4 +1,4 @@
-import { Gender, IMutationPerson, IPerson, Status } from '../interfaces/person';
+import { Gender, IMutationPerson, Status } from '../interfaces/person';
 
 const GENDERS = ['All', 'Female', 'Male', 'Other'];
 const STATUS = ['All', 'Single', 'Married'];

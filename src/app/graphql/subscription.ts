@@ -13,23 +13,23 @@ const CREATED = gql`
       haveChild
       children {
         id
-        firstname
-        lastname
-        age
-        gender
-        birthdate
-        status
-        haveChild
+        # firstname
+        # lastname
+        # age
+        # gender
+        # birthdate
+        # status
+        # haveChild
       }
       parents {
         id
-        firstname
-        lastname
-        age
-        gender
-        birthdate
-        status
-        haveChild
+        # firstname
+        # lastname
+        # age
+        # gender
+        # birthdate
+        # status
+        # haveChild
       }
     }
   }
@@ -56,23 +56,23 @@ const UPDATED = gql`
       haveChild
       children {
         id
-        firstname
-        lastname
-        age
-        gender
-        birthdate
-        status
-        haveChild
+        # firstname
+        # lastname
+        # age
+        # gender
+        # birthdate
+        # status
+        # haveChild
       }
       parents {
         id
-        firstname
-        lastname
-        age
-        gender
-        birthdate
-        status
-        haveChild
+        # firstname
+        # lastname
+        # age
+        # gender
+        # birthdate
+        # status
+        # haveChild
       }
     }
   }

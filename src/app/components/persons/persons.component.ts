@@ -8,7 +8,7 @@ import {
   DELETED,
   UPDATED,
 } from 'src/app/graphql/subscription';
-import { IMutationPerson } from 'src/app/interfaces/person';
+import { IMutationPerson, IPersonForCreate } from 'src/app/interfaces/person';
 import { PersonService } from 'src/app/services/person.service';
 import { filterDuplicate } from 'src/app/utils/filter';
 import { compareByProperty } from 'src/app/utils/sort';
@@ -52,7 +52,7 @@ export class PersonsComponent implements OnInit, OnDestroy {
         }
       });
     this.apollo
-      .subscribe<{ createPerson: IMutationPerson }>({
+      .subscribe<{ createPerson: IPersonForCreate }>({
         query: CREATED,
       })
       .subscribe((result) => {

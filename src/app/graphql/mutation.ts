@@ -11,22 +11,22 @@ const CREATE_PERSON = gql`
       birthdate
       haveChild
       parents {
-        firstname
+        # firstname
         id
-        lastname
-        age
-        gender
-        status
-        birthdate
+        # lastname
+        # age
+        # gender
+        # status
+        # birthdate
       }
       children {
         id
-        firstname
-        lastname
-        age
-        gender
-        status
-        birthdate
+        # firstname
+        # lastname
+        # age
+        # gender
+        # status
+        # birthdate
       }
     }
   }
@@ -52,22 +52,22 @@ const UPDATE_PERSON = gql`
       birthdate
       haveChild
       parents {
-        firstname
+        # firstname
         id
-        lastname
-        age
-        gender
-        status
-        birthdate
+        # lastname
+        # age
+        # gender
+        # status
+        # birthdate
       }
       children {
         id
-        firstname
-        lastname
-        age
-        gender
-        status
-        birthdate
+        # firstname
+        # lastname
+        # age
+        # gender
+        # status
+        # birthdate
       }
     }
   }

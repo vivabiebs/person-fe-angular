@@ -19,7 +19,6 @@ const removeItem = (data: string, arr: any[]) => {
   const index = arr.findIndex((a) => a.id === data);
   remain = arr.slice();
   remain.splice(index, 1);
-
   return remain;
 };
 

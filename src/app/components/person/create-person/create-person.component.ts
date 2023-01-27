@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Form, NgForm, RequiredValidator } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IMutationPerson, IPerson, IPersonForCreate } from 'src/app/interfaces/person';
+import { IMutationPerson, IPersonForCreate } from 'src/app/interfaces/person';
 import { PersonService } from 'src/app/services/person.service';
 import { DEFAULT_VALUE, GENDERS, STATUS } from 'src/app/shared/data';
 import { removeItem } from 'src/app/utils/filter';
@@ -75,6 +75,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
+    this.console.log("onsubmit", form.value)
     const eGender = str2enumGender(this.selectedGender);
     const eStatus = str2enumStatus(this.selectedStatus);
 
@@ -83,13 +84,14 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
       let str = 'Invalid input! Please fill the form completely.';
       this.console.log(str)
       this.errorMsg = 'Invalid input! Please fill out the form completely.';
-      // throw new Error('Invalid input! Please fill the form completely.');
       throw console.error('Invalid input! Please fill out the form completely.');
     }
 
-    const person: IMutationPerson = {
-      id: (+this.people[this.people.length - 1].id + 1).toString(),
-      // id: (+this.people[this.people.length - 1].id + 1),
+    let parentsId = _.map(this.selectedParents, 'id').map((id) => parseInt(id));
+    let childrenId = _.map(this.selectedChild, 'id').map((id) => parseInt(id));
+
+    const person: IPersonForCreate = {
+      id: (+this.people[this.people.length - 1].id + 1),
       firstname: form.value.firstname,
       lastname: form.value.lastname,
       age: +form.value.age,
@@ -97,32 +99,16 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
       status: eStatus,
       gender: Array.isArray(eGender) ? eGender[0] : eGender,
       haveChild: Boolean(this.haveChild),
-      parents: this.selectedParents,
-      children: this.selectedChild,
+      parents: parentsId,
+      children: childrenId,
     };
-
-    // const parentsId = _.map(this.selectedParents, 'id').map((id) => parseInt(id));
-    // const childrenId = _.map(this.selectedChild, 'id').map((id) => parseInt(id));
-    
-
-    // const person: IPersonForCreate = {
-    //   firstname: form.value.firstname,
-    //   lastname: form.value.lastname,
-    //   age: +form.value.age,
-    //   birthdate: form.value.birthdate,
-    //   status: eStatus,
-    //   gender: Array.isArray(eGender) ? eGender[0] : eGender,
-    //   haveChild: Boolean(this.haveChild),
-    //   parents: parentsId,
-    //   children: childrenId,
-    // };
 
     if (this.router.url.includes('create')) {
       this.personService.addPerson(person);
     } else if (this.router.url.includes('edit') && this.viewPerson) {
-      // person.id = this.viewPerson.id;
+      person.id = parseInt(this.viewPerson.id);
 
-      // this.personService.updatePerson(this.viewPerson.id, person);
+      this.personService.updatePerson(this.viewPerson.id, person);
       this.errorMsg = 'null';
     }
     this.clear();

@@ -1,17 +1,18 @@
-export interface IPerson {
-  id: string;
-  firstname: string;
-  lastname: string;
-  age: number;
-  gender: Gender;
-  status: Status;
-  birthdate: string;
-  haveChild: boolean;
-  children?: string[];
-  parents?: string[];
-}
+// export interface IPerson {
+//   id: string;
+//   firstname: string;
+//   lastname: string;
+//   age: number;
+//   gender: Gender;
+//   status: Status;
+//   birthdate: string;
+//   haveChild: boolean;
+//   children?: string[];
+//   parents?: string[];
+// }
 
 export interface IPersonForCreate {
+  id: number;
   firstname: string;
   lastname: string;
   age: number;
@@ -49,8 +50,10 @@ export interface IPersonUpdate {
   status: Status;
   birthdate: string;
   haveChild: boolean;
-  children?: IMutationPerson[];
-  parents?: IMutationPerson[];
+  children?: number[];
+  parents?: number[];
+  // children?: IPersonForCreate[];
+  // parents?: IPersonForCreate[];
 }
 
 export enum Gender {
