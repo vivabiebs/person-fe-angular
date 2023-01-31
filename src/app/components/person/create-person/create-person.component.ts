@@ -90,6 +90,9 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
     let parentsId = _.map(this.selectedParents, 'id').map((id) => parseInt(id));
     let childrenId = _.map(this.selectedChild, 'id').map((id) => parseInt(id));
 
+    if(childrenId.length===0) this.setHaveChild(false);
+    else this.setHaveChild(true);
+
     const person: IPersonForCreate = {
       id: (+this.people[this.people.length - 1].id + 1),
       firstname: form.value.firstname,
